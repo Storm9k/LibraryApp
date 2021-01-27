@@ -1,0 +1,31 @@
+﻿@model LibraryApp.Models.Book
+ 
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<h1>AddProduct</h1>
+
+<form asp-action="AddBook" asp-controller="Library">
+    <table>
+        <tr>
+            <td><label asp-for="Name" class="controll-label">Имя</label></td>
+            <td><input type="text" asp-for="Name" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Description" class="controll-label">Описание</label></td>
+            <td><input type="text" asp-for="Description" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Price" class="controll-label">Цена</label></td>
+            <td><input type="text" asp-for="Price" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Genre" class="controll-label">Категория</label></td>
+            <td> <input type="text" asp-for="Genre" class="form-control" /></td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Отправить" class="btn btn-default" />
+    </div>
+</form>
