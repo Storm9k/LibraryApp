@@ -26,19 +26,21 @@ namespace LibraryApp.Controllers
 
         }
 
-        public IActionResult List(int page = 1)
+        public IActionResult List(string genre = null, int page = 1)
         {
             BookList bookList = new BookList
             {
                 Books = context.Books
+                    .Where(g => genre == null || g.Genre.Name == genre)
                    .OrderBy(p => p.ID)
                    .Skip((page - 1) * PageSize)
                    .Take(PageSize),
                 PagingInfo =  new PagingInfo{
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = context.Books.Count()
-                }
+                    TotalItems = genre == null ? context.Books.Count() : context.Books.Where(e => e.Genre.Name == genre).Count(),
+                    CurrentGenre = genre
+                },
             };
 
             if (bookList.Books.Count() != 0)

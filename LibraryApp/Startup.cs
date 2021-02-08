@@ -41,8 +41,24 @@ namespace LibraryApp
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    "Page-int", 
+                    "/Page{page:int}", 
+                    new { controller = "Library", action = "List", page = 1});
+                routes.MapRoute(
+                    name: "GenreOnly",
+                    template: "{genre}",
+                    defaults: new { controller = "Library", action = "List", page = 1 }
+                    );
+                routes.MapRoute(
+                    name: "Page-Genre",
+                    template: "Page{page:int}/{genre}",
+                    defaults: new { controller = "Library", action = "List", page = 1}
+                    );
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Library}/{action=Index}/{id?}");
+                
             });
         }
     }
