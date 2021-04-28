@@ -12,7 +12,8 @@
         <span class="lead"> @p.Description</span>
         <a asp-action="Delete" asp-controller="Library" asp-route-id="@p.ID">Удалить</a>
     </div>*@
-    @Html.Partial("LibrarySummary", p)
+    @*@Html.Partial("LibrarySummary", p)*@
+    <partial name="LibrarySummary" model="p"/>
 }
 <div page-model="@Model.PagingInfo" page-action="List" 
         page-classes-enabled="true" 

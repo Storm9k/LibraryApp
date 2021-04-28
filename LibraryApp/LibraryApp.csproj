@@ -6,11 +6,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -129,5 +133,7 @@
     <None Include="wwwroot\lib\bootstrap\LICENSE" />
     <None Include="wwwroot\lib\bootstrap\README.md" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

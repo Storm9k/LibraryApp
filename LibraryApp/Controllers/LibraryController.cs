@@ -43,9 +43,10 @@ namespace LibraryApp.Controllers
                 },
             };
 
-            if (bookList.Books.Count() != 0)
-                return View("List", bookList);
-            else return NotFound("Объекты не найдены");
+            return View("List", bookList);
+            //if (bookList.Books.Count() != 0)
+
+            //else return NotFound("Объекты не найдены");
         }
 
         //public IActionResult ListWithPageSize(int page = 1)

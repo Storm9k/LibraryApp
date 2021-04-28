@@ -26,6 +26,11 @@ namespace LibraryApp
         {
             services.AddMvc(mvcOptions => mvcOptions.EnableEndpointRouting = false);
             services.AddDbContext<LibraryDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +43,12 @@ namespace LibraryApp
 
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Library}/{action=Index}/{id?}");
                 routes.MapRoute(
                     "Page-int", 
                     "/Page{page:int}", 
@@ -54,11 +63,12 @@ namespace LibraryApp
                     template: "Page{page:int}/{genre}",
                     defaults: new { controller = "Library", action = "List", page = 1}
                     );
-
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Library}/{action=Index}/{id?}");
+                     name: "ToCart",
+                     template: "{controller=Cart}/{action=Index}/");
                 
+                
+
             });
         }
     }

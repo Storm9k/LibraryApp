@@ -7,6 +7,13 @@
             @Model.Price.ToString("c")
         </span>>
     </h3>
-    <span class="lead"> @Model.Description</span>
-    <a asp-action="Delete" asp-controller="Library" asp-route-id="@Model.ID">Удалить</a>
+    <form id="@Model.ID" asp-action="AddToCart" asp-controller="Cart" method="post">
+        <input type="hidden" name="bookid" value="@Model.ID"/>
+        <input type="hidden" name="returnUrl" value=@ViewContext.HttpContext.Request.PathAndQuery()/>
+        <span class="lead">
+            @Model.Description
+            <button type="submit" class="btn btn-success btn-sm pull-right">Добавить в корзину</button>
+        </span>
+    </form>
+    @*<a asp-action="Delete" asp-controller="Library" asp-route-id="@Model.ID">Удалить</a>*@
 </div>

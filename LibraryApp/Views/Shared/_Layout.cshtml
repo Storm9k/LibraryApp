@@ -6,12 +6,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css"/>
+    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/**/*.min.css" asp-href-exclude="**/*-reboot*,**/*-grid"/>
+    <link rel="stylesheet" asp-href-include="lib/font-awesome/css/*.css"/>
     <title>Library</title>
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" asp-controller="Library" asp-action="Index">Library</a>
+        <div class="row">
+            <a class="navbar-brand" asp-controller="Library" asp-action="Index">Library</a>
+            <div class="col-lg-4 text-right ">
+                @await Component.InvokeAsync("CartSummary")
+            </div>
+        </div>
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">@await Component.InvokeAsync("NavigationPanel")</div>
