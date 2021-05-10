@@ -21,28 +21,10 @@ namespace LibraryApp.Migrations
 
             modelBuilder.Entity("LibraryApp.Models.Book", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GenreID")
+                    b.Property<int>("TempId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("GenreID");
-
-                    b.ToTable("Books");
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("LibraryApp.Models.CartLine", b =>
@@ -68,21 +50,6 @@ namespace LibraryApp.Migrations
                     b.HasIndex("OrderID");
 
                     b.ToTable("CartLine");
-                });
-
-            modelBuilder.Entity("LibraryApp.Models.Genre", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("LibraryApp.Models.Order", b =>
@@ -117,6 +84,9 @@ namespace LibraryApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Shipped")
+                        .HasColumnType("bit");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -129,31 +99,18 @@ namespace LibraryApp.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("LibraryApp.Models.Book", b =>
-                {
-                    b.HasOne("LibraryApp.Models.Genre", "Genre")
-                        .WithMany("Books")
-                        .HasForeignKey("GenreID");
-
-                    b.Navigation("Genre");
-                });
-
             modelBuilder.Entity("LibraryApp.Models.CartLine", b =>
                 {
                     b.HasOne("LibraryApp.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookID");
+                        .HasForeignKey("BookID")
+                        .HasPrincipalKey("TempId");
 
                     b.HasOne("LibraryApp.Models.Order", null)
                         .WithMany("Lines")
                         .HasForeignKey("OrderID");
 
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("LibraryApp.Models.Genre", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("LibraryApp.Models.Order", b =>

@@ -54,30 +54,7 @@ namespace LibraryApp.Controllers
         //    return View("List", context.Books.OrderBy(p => p.ID).Skip((page - 1) * PageSize).Take(PageSize));
         //}
 
-        [HttpGet]
-        public IActionResult AddBook()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AddBook(Book book)
-        {
-            context.Books.Add(book);
-            context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            Book book = context.Books.FirstOrDefault(p => p.ID == id);
-            if (book != null)
-            {
-                context.Remove(book);
-                context.SaveChanges();
-            }
-            return RedirectToAction("Index");
-        }
+        
 
     }
 }

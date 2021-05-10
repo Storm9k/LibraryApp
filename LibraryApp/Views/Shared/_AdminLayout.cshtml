@@ -2,13 +2,26 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" asp-href-include="liЬ/bootstrap/dist/css/*.min.css" />
+    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
     <title>@ViewBag.Title</title>
+    <style>
+        .input-validation-error {
+            border-color: red;
+            background-color: #fee;
+        }
+    </style>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </head>
-<body class="col-sm-1 col-lg-pull-2">
-    <div class="bg-info col-lg-pull-2">
+<body class="m-1 p-1">
+    <div class="bg-info p-2 m-1">
         <h4>@ViewBag.Title</h4>
     </div>
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success">@TempData["message"]</div>
+    }
     @RenderBody()
 </body>
 </html>

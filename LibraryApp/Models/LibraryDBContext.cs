@@ -19,7 +19,7 @@ namespace LibraryApp.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Ignore<CartLine>();
         }
     }
 }
